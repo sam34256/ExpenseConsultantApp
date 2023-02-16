@@ -13,8 +13,10 @@ import java.util.Calendar;
 public class Transaction {
 
     //	Constants representing a Transaction category/ type.
-    public static final int INCOME = 1, FEE = 2, ESSENTIALS = 3, TRANSPORT = 4, ENTERTAINMENT = 5, ALCOHOL = 6,
-            OTHER = 50;
+    public static final int[] CAT_VALUES= { 1, 2, 3, 4, 5, 6, 50};
+    public static final String[] CAT_NAMES= { "INCOME", "FEE", "ESSENTIALS", "TRANSPORT", "ENTERTAINMENT", "ALCOHOL",
+            "OTHER"};
+
 //	many more to be added
 
     private Calendar postedDate;
@@ -140,6 +142,37 @@ public class Transaction {
         return month + "/" + day;
     }
 
+//  -------------- other static methods -----------------------------------
+//
+
+    /**
+     * Gets a Transaction category name from its numerical value.
+     * @param catValue - numerical value of the category
+     * @return the equivalent name; empty String if not found
+     */
+    public static String getACategoryName(int catValue) {
+        for (int value : CAT_VALUES) {
+            if (value == catValue) {
+                return CAT_NAMES[value];
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Gets a Transaction category numerical value from its name.
+     * @param catName - name of the category
+     * @return the equivalent numerical value; -1 if not found
+     */
+    public static int getACategoryValue(String catName) {
+        for (int value = 0; value < CAT_VALUES.length; value++) {
+            if (CAT_NAMES[value].equalsIgnoreCase(catName)) {
+                return CAT_VALUES[value];
+            }
+        }
+        return -1;
+    }
+
 // --------------- getters and setters ------------------------------------
 
     public Calendar getPostedDate() {
@@ -184,6 +217,10 @@ public class Transaction {
 
     public int getCategory() {
         return category;
+    }
+
+    public String getCategoryName() {
+        return (getACategoryName(category));
     }
 
     public void setCategory(int category) {

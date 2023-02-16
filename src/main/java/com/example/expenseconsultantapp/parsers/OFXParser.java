@@ -277,7 +277,8 @@ public class OFXParser {
 			// when I encounter "</a>", it tells me that all the tags
 			// inside "a" should be considered to be closed
 			if (tag.equals("STMTTRN")) {
-				output.add(new Transaction(date, ref, name, mem, amt, Transaction.OTHER));
+				output.add(new Transaction(date, ref, name, mem, amt,
+						Transaction.getACategoryValue("OTHER"));
 			}
 			while (!lastOpenTag().equals(tag)) {
 				closeTag(lastOpenTag());
