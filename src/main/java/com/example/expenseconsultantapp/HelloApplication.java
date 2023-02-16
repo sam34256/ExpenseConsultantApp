@@ -20,7 +20,9 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) throws SQLException, IOException {
         launch();
+        /*
         Login firstCustomer = new Login();
         System.out.println(firstCustomer.validateLogin("demo@demo.com","password1"));
+         */
     }
 }

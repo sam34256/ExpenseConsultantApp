@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import com.example.expenseconsultantapp.entities.Transaction;
 import com.example.expenseconsultantapp.entities.TransactionList;
@@ -366,20 +367,22 @@ public class OFXParser {
 		}
 	}
 
-//	public static void main(String[] args) throws IOException {
-//		TransactionList t;
-//		File file = new File("/Users/starnet/Downloads/Checking1.qfx");
-//		instance();
-//		t = OFXParser.ofxParser(file);
-//		ListIterator<Transaction> i = t.listIterator(); // t.sort(Transaction.DESCRIPTION);
-//		while (i.hasNext()) {
-//			System.out.println(i.next());
-//		}
-//		System.out.println("Beginning date: " + Transaction.returnOFXFromCalendar(OFXParser.getStartDate()));
-//		System.out.println("Ending date: " + Transaction.returnOFXFromCalendar(OFXParser.getEndDate()));
-//		System.out.println("Is this a CC? " + OFXParser.isCreditCard());
-//		System.out.println("Currency: " + OFXParser.getCurrency());
-//		System.out.println("Account number: " + OFXParser.getAcctNumber());
-//		System.out.println("Account type: " + OFXParser.getAcctType());
-//	}
+	/*
+	public static void main(String[] args) throws IOException {
+		TransactionList t;
+		File file = new File("/Users/starnet/Downloads/Checking1.qfx");
+		instance();
+		t = OFXParser.ofxParser(file);
+		ListIterator<Transaction> i = t.listIterator(); // t.sort(Transaction.DESCRIPTION);
+		while (i.hasNext()) {
+			System.out.println(i.next());
+		}
+		System.out.println("Beginning date: " + Transaction.returnOFXFromCalendar(OFXParser.getStartDate()));
+		System.out.println("Ending date: " + Transaction.returnOFXFromCalendar(OFXParser.getEndDate()));
+		System.out.println("Is this a CC? " + OFXParser.isCreditCard());
+		System.out.println("Currency: " + OFXParser.getCurrency());
+		System.out.println("Account number: " + OFXParser.getAcctNumber());
+		System.out.println("Account type: " + OFXParser.getAcctType());
+	}
+	*/
 }
