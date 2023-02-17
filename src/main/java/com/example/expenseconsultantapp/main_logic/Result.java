@@ -6,7 +6,7 @@ public class Result extends DataTransfer {
 	// of the front/back end of the house.
 
 	public enum Code {
-		SUCCESS, IO_ERROR
+		SUCCESS, IO_ERROR, LONG_LIST_ERROR,
 	} // ...
 
 	private Code resultCode;

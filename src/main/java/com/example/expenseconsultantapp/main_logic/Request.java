@@ -5,7 +5,13 @@ public class Request extends DataTransfer {
 	public enum Button {
 		// buttons of Main Menu
 		START, PARSE_OFX, MANUAL, SUMMARY, ADVICE, SETTINGS, HELP, LOG_OUT,
+		// screen columns and descending/ascending (orientation) arrow
+		// on active column
+		DATE, REF, NAME, MEMO, AMOUNT, CAT, ORIENTATION,
+		// no button pressed
+		NONE,
 		// other buttons, organized by screens
+
 		// ...
 	}
 
@@ -57,6 +63,7 @@ public class Request extends DataTransfer {
 		super.reset();
 		from = "";
 		to = "";
+		button = Button.NONE;
 	}
 
 }

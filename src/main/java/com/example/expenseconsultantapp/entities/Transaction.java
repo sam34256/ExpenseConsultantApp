@@ -27,7 +27,7 @@ public class Transaction {
     private int category;
 
     //	Constants representing different fields of Transaction; used in sorting.
-    public static final int POSTED_DATE = 1, REF_NUMBER = 2, DESCRIPTION = 3, MEMO = 4, AMOUNT = 5, CATEGORY = 6;
+    public static final int POSTED_DATE = 0, REF_NUMBER = 1, DESCRIPTION = 2, MEMO = 3, AMOUNT = 4, CATEGORY = 5;
 
     /**
      * Class constructor.

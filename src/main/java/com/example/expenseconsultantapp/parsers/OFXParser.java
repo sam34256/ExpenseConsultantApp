@@ -17,7 +17,7 @@ import com.example.expenseconsultantapp.entities.TransactionList;
 /**
  * 
  * This Parser class parses bank-generated transaction reports and turns them
- * into a list of transactions.
+ * into a list of transactions no longer than 3-months-worth.
  * 
  * ( OFX = Open Financial Exchange )
  * 
@@ -33,7 +33,8 @@ import com.example.expenseconsultantapp.entities.TransactionList;
 public class OFXParser {
 
 	private static TransactionList output = new TransactionList();
-	private static Calendar startDate, endDate;
+	private static Calendar startDate;
+	private static Calendar endDate;
 	private static boolean isCreditCard;
 	private static String currency;
 	private static String acctType;
@@ -87,8 +88,18 @@ public class OFXParser {
 		return endDate;
 	}
 
+	/**
+	 * This setter makes sure the resulting list of Transactions will
+	 * NOT be longer than 3 months worth of data.
+	 * @param endDate
+	 */
 	public static void setEndDate(Calendar endDate) {
-		OFXParser.endDate = endDate;
+		Calendar maxDate = Transaction.returnCalendarFromOFX(Transaction.returnOFXFromCalendar(getStartDate()));
+		maxDate.add(Calendar.MONTH, 3);
+		if (maxDate.compareTo(endDate)<0) {
+			OFXParser.endDate = Transaction.returnCalendarFromOFX(Transaction.returnOFXFromCalendar(maxDate));
+		}
+		else OFXParser.endDate = endDate;
 	}
 
 	public static boolean isCreditCard() {
@@ -263,6 +274,10 @@ public class OFXParser {
 			if (tag.equals("STMTTRN")) {
 				clearFields();
 			}
+			if (tag.equals("CREDITCARDMSGSRSV1")) {
+				setCreditCard(true);
+				setAcctType("CREDIT CARD");
+			}
 		}
 
 		/**
@@ -276,9 +291,9 @@ public class OFXParser {
 			// tags in between. For example consider: <a><b><c><d></a>
 			// when I encounter "</a>", it tells me that all the tags
 			// inside "a" should be considered to be closed
-			if (tag.equals("STMTTRN")) {
+			if (tag.equals("STMTTRN") && date.compareTo(getEndDate()) <= 0) {
 				output.add(new Transaction(date, ref, name, mem, amt,
-						Transaction.getACategoryValue("OTHER"));
+						Transaction.getACategoryValue("OTHER")));
 			}
 			while (!lastOpenTag().equals(tag)) {
 				closeTag(lastOpenTag());
@@ -323,15 +338,6 @@ public class OFXParser {
 				// no functionality yet
 				return;
 			}
-			if (lastOpenTag().equals("CREDITCARDMSGSRSV1")) {
-				setCreditCard(true);
-				setAcctType("CREDIT CARD");
-				return;
-			}
-			if (lastOpenTag().equals("BANKMSGSRSV1")) {
-				setCreditCard(false);
-				return;
-			}
 			if (lastOpenTag().equals("CURDEF")) {
 				setCurrency(text);
 				return;
@@ -371,7 +377,7 @@ public class OFXParser {
 	/*
 	public static void main(String[] args) throws IOException {
 		TransactionList t;
-		File file = new File("/Users/starnet/Downloads/Checking1.qfx");
+		File file = new File("/Users/starnet/Downloads/CreditCard11.qfx");
 		instance();
 		t = OFXParser.ofxParser(file);
 		ListIterator<Transaction> i = t.listIterator(); // t.sort(Transaction.DESCRIPTION);

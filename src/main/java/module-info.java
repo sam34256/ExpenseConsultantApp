@@ -1,4 +1,4 @@
-module com.example.expenseconsultantapp {
+module src.ay_ics499_2023 {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -10,4 +10,19 @@ module com.example.expenseconsultantapp {
 
     opens com.example.expenseconsultantapp to javafx.fxml;
     exports com.example.expenseconsultantapp;
+
+//    opens main to javafx.fxml;
+//    exports main;
+    opens main.gui.mainWindows to javafx.fxml;
+    exports main.gui.mainWindows;
 }
+
+
+//module src.ay_ics499_2023{
+//        requires javafx.controls;
+//        requires javafx.fxml;
+//
+//
+//        opens main to javafx.fxml;
+//        exports main;
+//        }
