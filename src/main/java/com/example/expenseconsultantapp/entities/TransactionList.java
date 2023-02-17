@@ -51,6 +51,15 @@ public class TransactionList {
     }
 
     /**
+     * Gets a Transaction at <index> position in the Transaction list.
+     * @param index - position in the list
+     * @return - seeked Transaction
+     */
+    public Transaction get(int index) {
+        return transactionList.get(index);
+    }
+
+    /**
      * Method places a new Transaction ArrayList into its main container,
      * transactionList, if its empty or null.
      *
