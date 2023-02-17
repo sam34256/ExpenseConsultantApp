@@ -71,6 +71,10 @@ public class PEC {
 //	}
 // ...
 
+	/**
+	 * Sets all columns to be viewed in descending order, sets the sorted
+	 * column to go by as the one with the "date posted".
+	 */
 	private void resetView() {
 		for (int i = 0; i < descColumn.length; i++) {
 			descColumn[i] = true;
@@ -80,7 +84,9 @@ public class PEC {
 
 	/**
 	 * Gets the name + abs. path from the Request object, checks the file for
-	 * readability, and parses it.
+	 * readability, hands the job over to OFX parser and collects and expedites
+	 * the Result as a ListIterator. The newly populated list is no more than
+	 * 3 months long.
 	 * @param request - Request object
 	 * @return - list of Result objects with Transaction fields filled out
 	 */
@@ -110,6 +116,11 @@ public class PEC {
 		return rList;
 	}
 
+	/**
+	 * Fetches the Transaction list, sorts it by the active column criterion
+	 * and distinguishes whether the data are in descending or ascending order.
+	 * @return the Result object list with all Transaction fields filled out
+	 */
 	private ListIterator<Result> getNewView() {
 		ListIterator<Transaction> it = tList.sort(sortedColumn);
 		ListIterator<Result> resIt = new ArrayList<Result>().listIterator();
@@ -130,11 +141,21 @@ public class PEC {
 		return resIt;
 	}
 
+	/**
+	 * Switches the view between descending and ascending order.
+	 * @return new IteratorList to view
+	 */
 	private ListIterator<Result> sortingOrientationSwitched() {
 		descColumn[sortedColumn] = !descColumn[sortedColumn];
 		return getNewView();
 	}
 
+	/**
+	 * Switches between the active columns and prepares a newly sorted view.
+	 * @param request Request object preloaded with the button (column header)
+	 *                pressed
+	 * @return new IteratorList to view
+	 */
 	private ListIterator<Result> sortedColumnSwitched(Request request) {
 		switch (request.getButton()) {
 			case DATE:
