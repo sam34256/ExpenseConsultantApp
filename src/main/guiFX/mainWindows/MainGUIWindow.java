@@ -30,11 +30,17 @@ public class MainGUIWindow extends Application implements GUI_Settings_Variables
     }
     @Override
     public void start(Stage stage) throws IOException {
+     //  runGUIFX(stage);
+       runOldGUI();
+
+    }
+
+    private void runGUIFX(Stage stage){
         this.mainGuiStage = stage;
         stage.setTitle(GUI_Settings_Variables.strDefaultString);
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainGUIWindow.class.getResource("guiFX.fxml"));
-       // mainBox = (BorderPane) fxmlLoader.load();
+        // mainBox = (BorderPane) fxmlLoader.load();
         mainBox = new BorderPane();
         Pane menuP = new Pane();
 
@@ -51,5 +57,10 @@ public class MainGUIWindow extends Application implements GUI_Settings_Variables
         mainGuiStage.setScene(mainWindowScene);
         mainGuiStage.show();
         minorStage.show();
+
+    }
+
+    private void runOldGUI(){
+        new gui_v1.mainWindows.MainGUIWindow();
     }
 }
