@@ -32,4 +32,5 @@ public class GUI_RecordsFrame extends JFrame implements GUI_Settings_Variables{
 	public Component getComponent() {
 		return this;
 	}
+
 }
