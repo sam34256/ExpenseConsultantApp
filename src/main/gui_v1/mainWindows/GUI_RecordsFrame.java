@@ -16,8 +16,13 @@ public class GUI_RecordsFrame extends JFrame implements GUI_Settings_Variables{
 		setBackground(guiFramesBackgroundColor);
 		setForeground(guiFramesForegroundColor);
 
-		setJMenuBar(new GUI_Menu(this));
+//		setJMenuBar(new GUI_Menu(this));
 		setTitle(recordsGUIWindowTitle);
+		if(gui_v1.settings.GUI_Static_Settings.workStage==0){
+			setBackground(clrB_JMenuBar);
+		}else{
+			setForeground(clrF_JMenuBar);
+		}
 		setSize(recordsGUIWindowFrameSize);
 		setLocationRelativeTo(null);
 		setLayout(new BorderLayout());

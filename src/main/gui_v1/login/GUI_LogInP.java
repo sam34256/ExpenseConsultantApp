@@ -53,7 +53,7 @@ public class GUI_LogInP extends JPanel implements GUI_LoginSignUpWiindows_Settin
     @Override
     public void actionPerformed(ActionEvent a) {
         if (a.getActionCommand().compareToIgnoreCase("OK")==0) {
-            String userInfo = "User Login: "+ jtfLogInName.getName() + "\nPasword: " + jtfPass.getText()  + "\nPassword2: "+ jtfPass2.getPassword();
+            String userInfo = "User Login: "+ jtfLogInName.getName() + "\nPasword: " + jtfPass.getPassword()  + "\nPassword2: "+ jtfPass2.getPassword();
 
             JOptionPane.showMessageDialog(null, userInfo,"Confirm", JOptionPane.INFORMATION_MESSAGE);
             loginFrame.setVisible(false);
